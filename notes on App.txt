@@ -1,0 +1,203 @@
+    -----------------------    हमर बिलासपुर is a mobile application developed using Flutter and Dart.   ------------------------
+
+Q - How to add new icon (widget) in home page screen ?
+
+All the files will be available in project-> lib-> and all major pages will be present.
+And for the pages present in home page will be available in project-> lib-> pages from home page-> all pages will be present.
+
+
+Step 1: first make a page for new icon in pages from home page.
+         project-> lib-> pages from home page-> new_icon.
+         Add this code to the page :
+
+import 'package:flutter/material.dart';
+
+class new_icon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('New Icon'),
+      ),
+      body: Center(
+        child: Text(
+          'New icon Information',
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
+    );
+  }
+}
+ 
+        
+
+Step 2: first open home_screen.dar, present in lib folder.
+Step 3: In HomeScreen class where :
+        final List<Map<String, dynamic>> items = [
+
+{'image': 'assets/new_iocn.png', 'title': 'New_Icon_Name', 'route': new_icon()}
+
+ ];
+
+Add the same class name in route the one you have given in you new_icon page.
+
+Step 4: It will show some error where you have to install those packages.
+        you can install it by clicking on it.
+
+import will be like this :
+import 'package:mor_bilaspur/pages%20from%20home%20page/new_icon.dart';
+
+Step 5: Now add image or logo you wanna add to the icon to folder assets.
+        project-> assets-> new_icon_image
+
+        After adding image to the folder.
+        Go to file called 'pubspec.yaml'
+        click on pub get.
+Step 6: Run the project.
+
+   new icon (widget) in home page screen will be added.
+
+Q - How to add page to already exsisting page ?
+   
+   All the files will be available in project-> lib-> and all major pages will be present.
+And for the pages present in home page will be available in project-> lib-> pages from home page-> all pages will be present.
+
+
+Step 1: first make a page for new icon in pages from home page.
+         project-> lib-> pages from home page-> exsisting_page.
+         Add this code to the page :
+
+import 'package:flutter/material.dart';
+
+class exsisting_page extends StatelessWidget {
+final String title;
+ 
+exsisting_page({required this.title});
+
+final List<String> items = [
+  'new_page',
+];
+
+//mapping each item to its corresponding screen(page)
+final Map<String, Widget Function(BuildContent)> itemScreens={
+'new_page': (context) => exsisting_page(),
+};
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Adding new Page'),
+      ),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: itemScreens[items[index]]!),
+              );
+            },
+            child: Card(
+              margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              color: Colors.lightBlue[100],
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  items[index],
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+
+
+// Now add the class  for new page linking.
+
+// New Page
+class new_page extends StatefulWidget {
+
+
+  @override
+  new_page createState() => new_page();
+}
+
+class new page extends State<new page> {
+   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('New Page'),backgroundColor: Color(0xFF49BAEE),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: items.map((item) {
+            return Column(
+              children: [
+                GestureDetector(
+                  onTap: () => _onItemTap(item),
+                  child: SizedBox(
+                    width: double.infinity,
+                    height: 70,  // Fixed height for all cards
+                    child: Card(
+                      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                      color: Colors.lightBlue[100],
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          item,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+  Now let me epplain this code:
+
+first we have take an exsisting page.
+we added our content in list form.
+we styled the list in blue conatiner rectangular box.
+then we created another class called new page.
+ and then we call this new page by clicking on new_page.
+
+major code of linking the text to new page is :
+  
+----------------------------------------------------------------------------------|
+ final List<String> items = [                                                     |
+  'new_page',                                                                     | 
+];                                                                                |
+                                                                                  |
+//mapping each item to its corresponding screen(page)                             |
+final Map<String, Widget Function(BuildContent)> itemScreens={                    |
+'new_page': (context) => exsisting_page(),                                        |
+};                                                                                |
+----------------------------------------------------------------------------------|                                                                                 
